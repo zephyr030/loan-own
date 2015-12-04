@@ -1,0 +1,66 @@
+@(loginForm: play.api.data.Form[module.form.LoginFrom])(implicit lang: Lang, data: core.mvc.ViewData[_])
+@import play.api.i18n.Messages.Implicits._
+@import play.api.Play.current
+@data.style("stylesheets/admin.css")(0)
+@data.script("javascripts/jquery-1.8.3.js")(0)
+@data.script("javascripts/auth/login.js")(1)
+@main("测试服务器") {
+  <div class="singin">
+    <div class="sinBox">
+      <div class="tit">@Messages("login.title")</div>
+      <form action="/doLogin" name="form1" method="post" id="form1">
+        <div class="fm">
+          <div class="alert mb30 alert-error" style="display : @if(loginForm("userErr").hasErrors) {block} else {none}; width: 222px;"></div>
+          <div class="alert-img">
+            <em></em>
+            @if(loginForm("userErr").hasErrors) {
+              @loginForm("userErr").error.get.message
+            }
+          </div>
+        </div>
+        <div id="sboxsa" class="sBox sa">
+          <i id="account_i">@Messages("login.username")</i>
+          <input id="username" name="username" type="text" value="@loginForm("username").value"/>
+          @if(loginForm("username").hasErrors) {
+            @loginForm("username").error.get.message
+          }
+        </div>
+        <div id="sboxsb" class="sBox sb">
+          <i id="pwd_i">@Messages("login.pwd")</i>
+          <input id="pwd" name="pwd" autocomplete="off" type="password"/>
+          @if(loginForm("pwd").hasErrors) {
+            @loginForm("pwd").error.get.message
+          }
+        </div>
+        <div id="sboxsb" class="sBox sb">
+          <i id="pwd_i">@Messages("login.pwd")</i>
+          <select id="sex" name="sex" autocomplete="off">
+            <option value="1" @if(loginForm("sex").value.getOrElse("0") == "1") {selected = "selected"}>男</option>
+            <option value="2" @if(loginForm("sex").value.getOrElse("0") == "2") {selected = "selected"}>女</option>
+            <option value="3" @if(loginForm("sex").value.getOrElse("0") == "3") {selected = "selected"}>未知</option>
+          </select>
+          @if(loginForm("sex").hasErrors) {
+            @loginForm("sex").error.get.message
+          }
+        </div>
+        <div class="buton clearfix">
+          <input type="submit" title="提交">
+          <a href="/register" onclick="" class="btn btn-large btn-warning">@Messages("login.reg")</a>
+        </div>
+       </form>
+      <div class="most-login">
+        <p>@Messages("login.cooperateAccountLogin")</p>
+        <p class="mt15 clearfix">
+          <a class="qq" href="javascript:void(0)"></a>
+          <a class="sina" href="javascript:void(0)"></a>
+          <a class="ren" href="javascript:void(0)"></a>
+        </p>
+        <p class="mt10 clearfix">
+          <a class="google" href="javascript:void(0)"></a>
+          <a class="twitter" href="javascript:void(0)"></a>
+          <a class="facebook" href="javascript:void(0)"></a>
+        </p>
+      </div>
+    </div>
+  </div>
+}

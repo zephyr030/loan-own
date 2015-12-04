@@ -1,0 +1,6 @@
+login.title=登陆
+login.username=用户名
+login.pwd=密码
+login.valid.user.error=用户名验证失败
+login.reg=注册
+login.cooperateAccountLogin=登陆成功
